@@ -4,10 +4,11 @@
 Flask==3.0.0
 flask-cors==4.0.0
 requests==2.31.0
+pydantic-settings>=2.0
 
 # Model Context Protocol (MCP) & Data Processing
-mcp==0.1.0
-markitdown==0.0.1
+mcp>=1.0.0
+markitdown[all]
 
 # Note: The project also requires external tools:
 # - GAIA CLI (AMD)
