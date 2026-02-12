@@ -26,12 +26,10 @@ def ask():
     if not question:
         return jsonify({"answer": "Pergunta vazia."})
 
-    # Coletar e limpar contexto
     snippets, citations = [], []
     try:
         if MCP_CMD:
             raw_snippets, citations = gather_snippets(MCP_CMD, question)
-            # Limpar cada snippet de lixo binário
             snippets = [clean_snippet(s) for s in raw_snippets]
     except Exception:
         snippets, citations = [], []
@@ -40,22 +38,11 @@ def ask():
     context_text = "\n\n".join(snippets[:3])
     
     # Projetar prompt para ser curto e imune a falhas de formato
-    final_prompt = f"""Você é um assistente direto e objetivo.
-    LEIA O CONTEXTO ABAIXO:
-    ---------------------
+    final_prompt = f"""
     {context_text if context_text else "Nenhum contexto disponível."}
-    ---------------------
 
-    AGORA, RESPONDA À PERGUNTA DO USUÁRIO:
-    "{question}"
-
-    REGRAS OBRIGATÓRIAS:
-    1. Responda em Português.
-    2. Use no MÁXIMO 2 frases curtas.
-    3. Se o contexto tiver caracteres estranhos, IGNORE-OS.
-    4. NÃO explique o que você vai fazer, apenas dê a resposta.
-
-    RESPOSTA:"""
+    A pergunta é:
+    "{question}"""
 
     # Chamar LLM (Sem role 'system', tudo em 'user' para evitar confusão do modelo)
     raw_answer = chat([
