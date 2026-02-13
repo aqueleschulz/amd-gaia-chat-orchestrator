@@ -6,6 +6,8 @@ flask-cors==4.0.0
 requests==2.31.0
 httpx>=0.27.0
 pydantic-settings>=2.0
+amd-gaia>=0.15.4
+fastapi>=0.1.0
 
 # Model Context Protocol (MCP) & Data Processing
 mcp>=1.0.0
