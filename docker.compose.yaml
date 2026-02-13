@@ -1,0 +1,12 @@
+services:
+  nebula:
+    build: .
+    container_name: nebula-orchestrator
+    ports:
+      - "5000:5000" 
+    volumes:
+      - ./data:/app/data
+    environment:
+      - LEMONADE_API_URL=http://host.docker.internal:8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

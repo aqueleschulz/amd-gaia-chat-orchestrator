@@ -23,11 +23,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install pytest pytest-asyncio httpx
 
-    - name: Run Tests with Pytest
+    - name: Run Tests
+      env:
+        PYTHONPATH: ${{ github.workspace }}
       run: |
+        mkdir -p data
         pytest -v
 
-    - name: Build Docker Image
+    - name: Build Docker Image (Full Stack)
       run: |
-        docker build . --file Dockerfile --tag datastream-etl:latest
+        docker build . --tag nebula:latest
