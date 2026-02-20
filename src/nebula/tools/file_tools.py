@@ -1,12 +1,10 @@
 import os
 from pathlib import Path
 from markitdown import MarkItDown
-from gaia.agents.base.tools import tool
 from src.nebula.config.settings import settings
 
 md = MarkItDown()
 
-@tool
 def list_files(pattern: str = "**/*") -> str:
     try:
         root = Path(settings.workspace_dir).resolve()
@@ -26,7 +24,6 @@ def list_files(pattern: str = "**/*") -> str:
     except Exception as e:
         return f"Erro ao listar arquivos: {str(e)}"
 
-@tool
 def read_file(filename: str) -> str:
     try:
         root = Path(settings.workspace_dir).resolve()
